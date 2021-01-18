@@ -12,6 +12,10 @@ var thirdImageIndex;
 var attemptsAllowed = 25;
 var attemptsCounter = 0;
 
+var data2 = [];
+var data3 = [];
+var data4 = [];
+
 function Product(productName, pathImage){
   this.productName = productName;
   this.pathImage = pathImage;
@@ -79,14 +83,15 @@ function handleUserClick(event){
 
   }
   else {
-    // handle end of voting
     var goatResult;
-    var sum1 =0;
     for(var i = 0; i < Product.prototype.allProduct.length; i++){
-      goatResult = document.createElement('li');
-      sum1= sum1 + Product.prototype.allProduct[i].timeShown ;
-      goatResult.textContent = Product.prototype.allProduct[i].productName + '--> '+'___' +Product.prototype.allProduct[i].votes + ' votes' + ' ____________  ' + Product.prototype.allProduct[i].timeShown + '  ' + 'times Shown'+'__________________' + customerInterestPrecentage( Product.prototype.allProduct[i].votes , Product.prototype.allProduct[i].timeShown )+ '  %   customer Interest Precentage';
-      resultsList.appendChild(goatResult);
+      // goatResult = document.createElement('li');
+      // goatResult.textContent = Product.prototype.allProduct[i].productName + '--> '+'___' +Product.prototype.allProduct[i].votes + ' votes' + ' ____________  ' + Product.prototype.allProduct[i].timeShown + '  ' + 'times Shown'+'__________________' + customerInterestPrecentage( Product.prototype.allProduct[i].votes , Product.prototype.allProduct[i].timeShown )+ '  %   customer Interest Precentage';
+      data2.push(Product.prototype.allProduct[i].votes);
+      data3.push(Product.prototype.allProduct[i].timeShown);
+      data4.push(customerInterestPrecentage( Product.prototype.allProduct[i].votes , Product.prototype.allProduct[i].timeShown ));
+
+      // resultsList.appendChild(goatResult);
     }
     firstImageProduct.removeEventListener('click',handleUserClick);
     secondImageProduct.removeEventListener('click',handleUserClick);
@@ -120,9 +125,9 @@ function generateRandomIndex(){
   return Math.floor(Math.random() * (Product.prototype.allProduct.length));
 }
 
-console.log(generateRandomIndex());
 renderThreeRandomImages();
 
+// calculate Percentage
 
 function customerInterestPrecentage (votes ,timeShown){
   if(votes > 0 || timeShown > 0 ){
@@ -132,15 +137,21 @@ function customerInterestPrecentage (votes ,timeShown){
   }
 }
 
+// iF add number OfRounds
+
 var numberOfRoundsForm = document.getElementById('numberOfRoundsForm');
 numberOfRoundsForm.addEventListener('submit',numberOfRoundsFunction);
 
 function numberOfRoundsFunction(event){
   event.preventDefault();
-  resultsList.textContent='';
+  // resultsList.textContent='';
   attemptsCounter = 0;
   attemptsAllowed = Number (event.target.numberOfRounds.value);
   console.log(attemptsAllowed);
+
+  data2.length = 0;
+  data3.length = 0;
+  data4.length= 0;
 
 
   if(attemptsAllowed <= 0){
@@ -172,5 +183,104 @@ function numberOfRoundsFunction(event){
     secondImageProduct.addEventListener('click',handleUserClick);
     thirdImageProduct.addEventListener('click',handleUserClick);
     renderThreeRandomImages();
+    var myChart2 = document.getElementById('myChart2').getContext('2d');
+
+    var chart2 = new Chart(myChart2, {
+      type: 'bar',
+      data: {
+        labels: labels2,
+        datasets: [ {
+          data: data2,
+          label: 'Number of votes',
+          backgroundColor: colors2,
+        },{
+          data: data3,
+          label: 'times Shown',
+          backgroundColor: colors3
+        },
+        ]
+      },
+      options: {
+        title: {
+          text: 'The Number of votes and times Shown of product',
+          display: true
+        },
+      }
+    });
+
+
+    var myChart4 = document.getElementById('myChart4').getContext('2d');
+
+    var chart4= new Chart(myChart4, {
+      type: 'bar',
+      data: {
+        labels: labels2,
+        datasets: [ {
+          data: data4,
+          label: 'customer Interest Precentage',
+          backgroundColor: colors4
+        }]
+      },
+      options: {
+        title: {
+          text: 'customer Interest Precentage',
+          display: true
+        },
+      }
+    });
   }
 }
+
+// show charts
+
+var labels2 = ['bag', 'banana', 'bathroom', 'boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon', 'pen' ,'pet-sweep' , 'scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
+var colors2 = ['#965d62', '#965d62', '#965d62', '#965d62','#965d62', '#965d62', '#965d62', '#965d62','#965d62', '#965d62', '#965d62', '#965d62','#965d62', '#965d62', '#965d62', '#965d62','#965d62', '#965d62', '#965d62', '#965d62'];
+var colors3 = ['#f2d974', '#f2d974', '#f2d974', '#f2d974','#f2d974', '#f2d974', '#f2d974', '#f2d974','#f2d974', '#f2d974', '#f2d974', '#f2d974','#f2d974', '#f2d974', '#f2d974', '#f2d974','#f2d974', '#f2d974', '#f2d974', '#f2d974'];
+var colors4 = ['#534e52', '#534e52', '#534e52', '#534e52','#534e52', '#534e52', '#534e52', '#534e52','#534e52', '#534e52', '#534e52', '#534e52','#534e52', '#534e52', '#534e52', '#534e52','#534e52', '#534e52', '#534e52', '#534e52'];
+
+
+var myChart2 = document.getElementById('myChart2').getContext('2d');
+
+var chart2 = new Chart(myChart2, {
+  type: 'bar',
+  data: {
+    labels: labels2,
+    datasets: [ {
+      data: data2,
+      label: 'Number of votes',
+      backgroundColor: colors2,
+    },{
+      data: data3,
+      label: 'times Shown',
+      backgroundColor: colors3
+    },
+    ]
+  },
+  options: {
+    title: {
+      text: 'The Number of votes and times Shown of product',
+      display: true
+    },
+  }
+});
+
+
+var myChart4 = document.getElementById('myChart4').getContext('2d');
+
+var chart4= new Chart(myChart4, {
+  type: 'bar',
+  data: {
+    labels: labels2,
+    datasets: [ {
+      data: data4,
+      label: 'customer Interest Precentage',
+      backgroundColor: colors4
+    }]
+  },
+  options: {
+    title: {
+      text: 'customer Interest Precentage',
+      display: true
+    },
+  }
+});
