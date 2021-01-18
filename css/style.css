@@ -11,8 +11,7 @@
      margin-left: 300px;
      border: 5px solid rgb(107, 29, 29);
      padding: 5px;
-     margin-top: 10px;
-     margin-bottom: 10px;
+     margin-top: 20px;
    }
    
   
@@ -37,7 +36,7 @@
     position: absolute;
     text-align: center;
     margin-left: 600px;
-    padding-top: 50px;
+    padding-top: 80px;
   }
 
   #results-list{
@@ -86,7 +85,20 @@
 
   .socialIcon {
     text-align: center;
-  list-style: inside;
+    list-style: inside;
   }
 
+  .chart {
+    text-align: center;
+    margin: auto;
+  }
+  
+  .row {
+    margin-bottom: 150px;
+  }
 
+  .container{
+
+    margin-top: 30px;
+    margin-left: 220px;
+  }
