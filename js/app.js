@@ -32,26 +32,36 @@ function Product(productName, pathImage){
 
 Product.prototype.allProduct = [];
 
-new Product('bag','assets/bag.jpg');
-new Product('banana','assets/banana.jpg');
-new Product('bathroom','assets/bathroom.jpg');
-new Product('boots','assets/boots.jpg');
-new Product('breakfast','assets/breakfast.jpg');
-new Product('bubblegum','assets/bubblegum.jpg');
-new Product('chair','assets/chair.jpg');
-new Product('cthulhu','assets/cthulhu.jpg');
-new Product('dog-duck','assets/dog-duck.jpg');
-new Product('dragon','assets/dragon.jpg');
-new Product('pen','assets/pen.jpg');
-new Product('pet-sweep','assets/pet-sweep.jpg');
-new Product('scissors','assets/scissors.jpg');
-new Product('shark','assets/shark.jpg');
-new Product('sweep','assets/sweep.png');
-new Product('tauntaun','assets/tauntaun.jpg');
-new Product('unicorn','assets/unicorn.jpg');
-new Product('usb','assets/usb.gif');
-new Product('water-can','assets/water-can.jpg');
-new Product('wine-glass','assets/wine-glass.jpg');
+if(! localStorage.getItem('products')){
+  new Product('bag','assets/bag.jpg');
+  new Product('banana','assets/banana.jpg');
+  new Product('bathroom','assets/bathroom.jpg');
+  new Product('boots','assets/boots.jpg');
+  new Product('breakfast','assets/breakfast.jpg');
+  new Product('bubblegum','assets/bubblegum.jpg');
+  new Product('chair','assets/chair.jpg');
+  new Product('cthulhu','assets/cthulhu.jpg');
+  new Product('dog-duck','assets/dog-duck.jpg');
+  new Product('dragon','assets/dragon.jpg');
+  new Product('pen','assets/pen.jpg');
+  new Product('pet-sweep','assets/pet-sweep.jpg');
+  new Product('scissors','assets/scissors.jpg');
+  new Product('shark','assets/shark.jpg');
+  new Product('sweep','assets/sweep.png');
+  new Product('tauntaun','assets/tauntaun.jpg');
+  new Product('unicorn','assets/unicorn.jpg');
+  new Product('usb','assets/usb.gif');
+  new Product('water-can','assets/water-can.jpg');
+  new Product('wine-glass','assets/wine-glass.jpg');
+
+  console.log(Product.prototype.allProduct.length);
+
+  setData();
+} else{
+  getData();
+
+  console.log(Product.prototype.allProduct.length);
+}
 
 console.log(Product.prototype.allProduct);
 
@@ -141,7 +151,6 @@ function handleUserClick(event){
       }
     });
 
-
     var chart4= new Chart(myChart4, {
       type: 'bar',
       data: {
@@ -159,6 +168,8 @@ function handleUserClick(event){
         },
       }
     });
+
+    setData();
   }
 }
 
@@ -219,31 +230,20 @@ function numberOfRoundsFunction(event){
   if(attemptsAllowed <= 0){
     alert('you should fill valid data');
   } else{
-    Product.prototype.allProduct = [];
-    new Product('bag','assets/bag.jpg');
-    new Product('banana','assets/banana.jpg');
-    new Product('bathroom','assets/bathroom.jpg');
-    new Product('boots','assets/boots.jpg');
-    new Product('breakfast','assets/breakfast.jpg');
-    new Product('bubblegum','assets/bubblegum.jpg');
-    new Product('chair','assets/chair.jpg');
-    new Product('cthulhu','assets/cthulhu.jpg');
-    new Product('dog-duck','assets/dog-duck.jpg');
-    new Product('dragon','assets/dragon.jpg');
-    new Product('pen','assets/pen.jpg');
-    new Product('pet-sweep','assets/pet-sweep.jpg');
-    new Product('scissors','assets/scissors.jpg');
-    new Product('shark','assets/shark.jpg');
-    new Product('sweep','assets/sweep.png');
-    new Product('tauntaun','assets/tauntaun.jpg');
-    new Product('unicorn','assets/unicorn.jpg');
-    new Product('usb','assets/usb.gif');
-    new Product('water-can','assets/water-can.jpg');
-    new Product('wine-glass','assets/wine-glass.jpg');
-
     firstImageProduct.addEventListener('click',handleUserClick);
     secondImageProduct.addEventListener('click',handleUserClick);
     thirdImageProduct.addEventListener('click',handleUserClick);
     renderThreeRandomImages();
   }
+}
+
+function setData(){
+  var products = JSON.stringify(Product.prototype.allProduct);
+  localStorage.setItem('products' , products);
+}
+
+
+function getData(){
+  var productsList = JSON.parse(localStorage.getItem('products'));
+  Product.prototype.allProduct = productsList;
 }
