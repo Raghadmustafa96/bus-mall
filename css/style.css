@@ -1,48 +1,41 @@
- img{
-    margin: 10px;
+#images-div img{
      width: 300px;
      height: 300px;
-     margin-left: auto; 
-    margin-right:auto
+     border: 3px solid #141314;
+
    }
 
-   #images-div{
-     margin-left: 300px;
-     border: 5px solid rgb(107, 29, 29);
-     padding: 5px;
-     margin-top: 20px;
-   }
-   
-  
-   body{
-    background: rgb(247, 249, 255);
-  }
-
-  header{
-    background: rgb(0, 0, 0);
-    height: 200px;
-    position: relative;
-  }
-  
-  main{
-    color: rgb(12, 9, 2);
-  }
-  
-  header h1{
-    color:  rgb(228, 153, 14);
+   h1,h2,h3,h4,h5,h6{
     font-family: "Lucida Console", "Courier New", monospace;
-    font-size: 50px;
-    position: absolute;
+   }
+
+   h1{
     text-align: center;
-    margin-left: 600px;
-    padding-top: 80px;
-  }
+    padding-top: 40px;
+
+    color: #fcfaef; 
+    /* font-family: 'Trocchi', serif;  */
+    font-family: 'Rouge Script', cursive;
+    font-size: 80px;
+   }
 
   #results-list{
+    margin-top: 20px;
     list-style-type: none;
+    text-align: center;
   }
-  
-  
+
+  #results-list li{
+    padding: 5px;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  #images-div{
+   margin-left: 150px;
+   margin-top: 100px;
+
+  }
+
   nav li{
     float: left;
     top: 5px;
@@ -56,13 +49,6 @@
     display: inline-block;
   }
  
-  footer{
-    background:rgb(1, 5, 15);
-    border-color: rgb(228, 153, 14);
-    width: 100%;
-    height: 140px;
-  }
-  
  
   footer a {
     text-decoration: none;
@@ -75,29 +61,70 @@
 
   
   footer img {
-    height: 30px;
-    width: 30px;
-    position: relative;
-    margin-top: 30px;
-    padding-right: 5px;
+    height: 50px;
+    width: 50px;
+    padding-top: 10px;
   }
 
   .socialIcon {
     text-align: center;
     list-style: inside;
+    margin-top: 20px;
   }
 
   .chart {
     text-align: center;
     margin: auto;
+    margin-right: 20px;
   }
   
   .row {
     margin-bottom: 150px;
   }
 
-  .container{
+  .col-chart{
+    margin-right: 30px;
+    margin-left: 35px;
 
-    margin-top: 30px;
-    margin-left: 220px;
   }
+
+ 
+  body{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 5px;
+    grid-template-rows: 150px 2fr 150px;
+}
+
+header{
+    background-color: #965d62;
+    grid-column: 1/-1;
+}  
+
+main{
+    display: grid;
+    grid-column: 1/-1;
+    grid-template-columns: 1fr 4fr;
+    gap: 5px;
+}
+
+main aside{
+
+    background-color:#6e4343;
+    grid-column: 1/2;
+}
+
+main div{
+    background-color:#fff3e6;
+    grid-column: 2/-1;
+}
+
+footer{
+    grid-column: 1/-1;
+    background-color: #534e52;
+}
+
+button{
+   margin-left: 150px;
+   width: 100px;
+}
