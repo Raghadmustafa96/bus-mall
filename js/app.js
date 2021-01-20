@@ -3,7 +3,6 @@
 var firstImageProduct = document.getElementById('first-image');
 var secondImageProduct = document.getElementById('second-image');
 var thirdImageProduct = document.getElementById('third-image');
-var resultsList = document.getElementById('results-list');
 var myChart2 = document.getElementById('myChart2').getContext('2d');
 var myChart4 = document.getElementById('myChart4').getContext('2d');
 
@@ -21,11 +20,11 @@ var data4 = [];
 
 var previousRow = [];
 
-function Product(productName, pathImage){
+function Product(productName, pathImage ,timeShown ,votes){
   this.productName = productName;
   this.pathImage = pathImage;
-  this.timeShown = 0;
-  this.votes = 0;
+  this.timeShown = timeShown;
+  this.votes = votes;
 
   Product.prototype.allProduct.push(this);
 }
@@ -33,26 +32,26 @@ function Product(productName, pathImage){
 Product.prototype.allProduct = [];
 
 if(! localStorage.getItem('products')){
-  new Product('bag','assets/bag.jpg');
-  new Product('banana','assets/banana.jpg');
-  new Product('bathroom','assets/bathroom.jpg');
-  new Product('boots','assets/boots.jpg');
-  new Product('breakfast','assets/breakfast.jpg');
-  new Product('bubblegum','assets/bubblegum.jpg');
-  new Product('chair','assets/chair.jpg');
-  new Product('cthulhu','assets/cthulhu.jpg');
-  new Product('dog-duck','assets/dog-duck.jpg');
-  new Product('dragon','assets/dragon.jpg');
-  new Product('pen','assets/pen.jpg');
-  new Product('pet-sweep','assets/pet-sweep.jpg');
-  new Product('scissors','assets/scissors.jpg');
-  new Product('shark','assets/shark.jpg');
-  new Product('sweep','assets/sweep.png');
-  new Product('tauntaun','assets/tauntaun.jpg');
-  new Product('unicorn','assets/unicorn.jpg');
-  new Product('usb','assets/usb.gif');
-  new Product('water-can','assets/water-can.jpg');
-  new Product('wine-glass','assets/wine-glass.jpg');
+  new Product('bag','assets/bag.jpg',0,0);
+  new Product('banana','assets/banana.jpg',0,0);
+  new Product('bathroom','assets/bathroom.jpg',0,0);
+  new Product('boots','assets/boots.jpg',0,0);
+  new Product('breakfast','assets/breakfast.jpg',0,0);
+  new Product('bubblegum','assets/bubblegum.jpg',0,0);
+  new Product('chair','assets/chair.jpg',0,0);
+  new Product('cthulhu','assets/cthulhu.jpg',0,0);
+  new Product('dog-duck','assets/dog-duck.jpg',0,0);
+  new Product('dragon','assets/dragon.jpg',0,0);
+  new Product('pen','assets/pen.jpg',0,0);
+  new Product('pet-sweep','assets/pet-sweep.jpg',0,0);
+  new Product('scissors','assets/scissors.jpg',0,0);
+  new Product('shark','assets/shark.jpg',0,0);
+  new Product('sweep','assets/sweep.png',0,0);
+  new Product('tauntaun','assets/tauntaun.jpg',0,0);
+  new Product('unicorn','assets/unicorn.jpg',0,0);
+  new Product('usb','assets/usb.gif',0,0);
+  new Product('water-can','assets/water-can.jpg',0,0);
+  new Product('wine-glass','assets/wine-glass.jpg',0,0);
 
   console.log(Product.prototype.allProduct.length);
 
@@ -98,16 +97,6 @@ function handleUserClick(event){
 
   }
   else {
-    var goatResult;
-    for(var i = 0; i < Product.prototype.allProduct.length; i++){
-      goatResult = document.createElement('li');
-      goatResult.textContent = Product.prototype.allProduct[i].productName + '--> '+'___' +Product.prototype.allProduct[i].votes + ' votes' + ' ____________  ' + Product.prototype.allProduct[i].timeShown + '  ' + 'times Shown'+'__________________' + customerInterestPrecentage( Product.prototype.allProduct[i].votes , Product.prototype.allProduct[i].timeShown )+ '  %   customer Interest Precentage';
-      data2.push(Product.prototype.allProduct[i].votes);
-      data3.push(Product.prototype.allProduct[i].timeShown);
-      data4.push(customerInterestPrecentage( Product.prototype.allProduct[i].votes , Product.prototype.allProduct[i].timeShown ));
-
-      resultsList.appendChild(goatResult);
-    }
     firstImageProduct.removeEventListener('click',handleUserClick);
     secondImageProduct.removeEventListener('click',handleUserClick);
     thirdImageProduct.removeEventListener('click',handleUserClick);
@@ -215,7 +204,6 @@ numberOfRoundsForm.addEventListener('submit',numberOfRoundsFunction);
 
 function numberOfRoundsFunction(event){
   event.preventDefault();
-  resultsList.textContent='';
   myChart2.textContent = '';
   myChart4.textContent = '';
 
@@ -233,7 +221,6 @@ function numberOfRoundsFunction(event){
     firstImageProduct.addEventListener('click',handleUserClick);
     secondImageProduct.addEventListener('click',handleUserClick);
     thirdImageProduct.addEventListener('click',handleUserClick);
-    renderThreeRandomImages();
   }
 }
 
