@@ -151,10 +151,6 @@ function numberOfRoundsFunction(event){
   data2.length = 0;
   data4.length= 0;
 
-
-  myChart2.disabled = true;
-
-
   if(attemptsAllowed <= 0){
     alert('you should fill valid data');
   } else{
